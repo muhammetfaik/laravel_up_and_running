@@ -13,8 +13,9 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
-    }
+        return view('tasks.index')
+               ->with('tasks',Task::all());
+    }   
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +35,12 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task;
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');    
+        $task->save();
+
+        return redirect('tasks');
     }
 
     /**
